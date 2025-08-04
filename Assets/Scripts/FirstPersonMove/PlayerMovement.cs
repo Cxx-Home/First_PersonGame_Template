@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
+    bool readyToJump=true;
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
 
@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         SpeedControl();
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
+        Debug.Log(grounded);
         if (grounded)
             rb.drag = groundDrag;
         else
